@@ -149,14 +149,14 @@ public class ModelManager implements Model {
     //=========== Bookings ============================================================================
     @Override
     public void addBooking(Booking booking) {
-        // TODO
+        addressBook.addBooking(booking);
         // Add the booking to data structure
     }
 
     @Override
     public boolean hasBooking(Booking booking) {
         requireNonNull(booking);
-        return false;
+        return addressBook.hasBooking(booking);
         // This is a simplistic way to check for conflicts. You'll need to replace it with
         // your actual booking list and conflict logic, which may involve checking overlaps.
 

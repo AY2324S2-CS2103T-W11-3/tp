@@ -3,9 +3,11 @@ package seedu.address.model.booking;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateBookingException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -58,6 +60,27 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
+     * Replaces the booking {@code target} in the list with {@code editedBooking}.
+     * {@code target} must exist in the list.
+     * The booking identity of {@code editedBooking} must not be the same as another existing booking in the list.
+     */
+    public void setBooking(Booking target, Booking editedBooking) {
+        requireNonNull(editedBooking);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException(); // Consider creating a BookingNotFoundException for clarity
+        }
+
+        if (!target.equals(editedBooking) && contains(editedBooking)) {
+            throw new DuplicatePersonException(); // Consider creating a DuplicateBookingException for clarity
+        }
+
+        internalList.set(index, editedBooking);
+    }
+
+
+    /**
      * Returns an unmodifiable view of the list.
      *
      * @return An unmodifiable ObservableList of bookings.
@@ -94,4 +117,27 @@ public class UniqueBookingList implements Iterable<Booking> {
     public String toString() {
         return internalList.toString();
     }
+
+    /**
+     * Returns true if {@code bookings} contains only unique bookings.
+     */
+    private static boolean bookingsAreUnique(List<Booking> bookings) {
+        for (int i = 0; i < bookings.size() - 1; i++) {
+            for (int j = i + 1; j < bookings.size(); j++) {
+                if (bookings.get(i).equals(bookings.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        requireNonNull(bookings);
+        if (!bookingsAreUnique(bookings)) {
+            throw new DuplicateBookingException();
+        }
+        internalList.setAll(bookings);
+    }
+
 }
