@@ -157,6 +157,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return bookings.asUnmodifiableObservableList();
     }
 
+    public boolean hasNoPersons() {
+        return this.persons.isEmpty();
+    }
+
+    public boolean hasNoBookings() {
+        return this.bookings.isEmpty();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

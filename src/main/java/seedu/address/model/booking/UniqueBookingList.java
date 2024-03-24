@@ -136,4 +136,11 @@ public class UniqueBookingList implements Iterable<Booking> {
         }
         return true;
     }
+
+    /**
+     * Returns true if {@code UniqueBookingList} has no bookings
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 }

@@ -147,4 +147,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Returns true if {@code UniquePersonList} has no persons
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 }

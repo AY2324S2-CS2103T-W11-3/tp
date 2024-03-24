@@ -1,0 +1,51 @@
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tags" : [ "friends" ],
+    "image" : "/images/default_image.png"
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "tags" : [ "colleagues", "friends" ],
+    "image" : "/images/default_image.png"
+  }, {
+    "name" : "tim",
+    "phone" : "99999999",
+    "email" : null,
+    "address" : "Very far away",
+    "tags" : [ "bro" ],
+    "image" : "/images/default_image.png"
+  }, {
+    "name" : "friend",
+    "phone" : null,
+    "email" : null,
+    "address" : null,
+    "tags" : [ ],
+    "image" : "/images/default_image.png"
+  }, {
+    "name" : "timi",
+    "phone" : null,
+    "email" : null,
+    "address" : null,
+    "tags" : [ ],
+    "image" : "/images/default_image.png"
+  } ],
+  "bookings" : [ {
+    "description" : "John's Birthday Party",
+    "start" : "2023-12-31 19:00",
+    "end" : "2023-12-31 23:00"
+  }, {
+    "description" : "yes",
+    "start" : "2023-12-31 19:00",
+    "end" : "2023-12-31 23:00"
+  }, {
+    "description" : "celebration",
+    "start" : "2023-12-31 19:00",
+    "end" : "2023-12-31 23:00"
+  } ]
+}
