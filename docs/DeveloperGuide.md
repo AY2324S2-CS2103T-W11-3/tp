@@ -2,16 +2,10 @@
 layout: page
 title: Developer Guide
 ---
+Welcome to our Developer Guide! This resource is designed to provide developers with a overview of Dook's architecture. Whether you're new to the project or looking to extend its functionality, this guide is the best place to start learning how to contribute to Dook.
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -394,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User inputs `/book` command with necessary details.
+1. User inputs `book` command with necessary details.
 2. Dook schedules the booking.
 3. Dook confirms the booking details to the user.
 
@@ -546,3 +540,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
+
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+--------------------------------------------------------------------------------------------------------------------
