@@ -55,7 +55,8 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns
+    /**
+     * Returns
      * true if there are no persons and bookings in {@code addressBook}
      */
     boolean isEmpty();

@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Description;
+import seedu.address.model.booking.EndTime;
+import seedu.address.model.booking.StartTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,11 +44,29 @@ public class SampleDataUtil {
         };
     }
 
+    public static Booking[] getSampleBookings() {
+        return new Booking[] {
+                new Booking(new Description("David's Party"),
+                        new StartTime("2023-12-31 19:00"),
+                        new EndTime("2023-12-31 22:00")),
+                new Booking(new Description("CS2103T Consult"),
+                        new StartTime("2023-11-01 12:30"),
+                        new EndTime("2023-11-01 13:30")),
+                new Booking(new Description("CS1101S Consult"),
+                        new StartTime("2023-11-02 13:00"),
+                        new EndTime("2023-11-02 14:00"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        for (Booking sampleBooking : getSampleBookings()) {
+            sampleAb.addBooking(sampleBooking);
+        }
+
         return sampleAb;
     }
 
