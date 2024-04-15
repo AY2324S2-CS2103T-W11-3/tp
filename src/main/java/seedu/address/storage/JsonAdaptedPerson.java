@@ -40,23 +40,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("image") String image) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-        this.image = image;
-    }
-
-    /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details without image.
-     */
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -80,7 +64,6 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        image = source.getImage().getFilePath().toString();
     }
 
     /**
@@ -121,7 +104,7 @@ class JsonAdaptedPerson {
 
         if (image != null) {
             final ImagePath imagePath = new ImagePath(Paths.get(image));
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, imagePath);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         } else {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         }
