@@ -491,7 +491,7 @@ Below is the expected contact list after running `delete 3`, we observe `Sarah J
 `find John` followed by `delete 1` deletes the 1st person with the name `John`.
 
 </div>
-<br>
+<div style="page-break-after: always;"></div>
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Be careful!**<br>
