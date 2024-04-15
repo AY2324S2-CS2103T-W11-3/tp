@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         final Circle clip = new Circle(45, 45, 39);
         displayPicture.setClip(clip);
         displayPicture.setImage(new Image(Objects.requireNonNull(this.getClass()
-                .getResourceAsStream(person.getImage().getStringPath()))));
+                .getResourceAsStream("/images/default_image.png"))));
         phone.setText(person.getPhone() == null ? "" : person.getPhone().value);
         address.setText(person.getAddress() == null ? "" : person.getAddress().value);
         email.setText(person.getEmail() == null ? "" : person.getEmail().value);
