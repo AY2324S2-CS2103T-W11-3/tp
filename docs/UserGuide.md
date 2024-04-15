@@ -252,7 +252,6 @@ decided to save his contact for future collaboration purposes.
 add -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG…​]
 ```
 
-
 | Param            | Remarks                                                                                                        |
 |------------------|----------------------------------------------------------------------------------------------------------------|
 | **NAME**         | Must be non-null and unique                                                                                    |
@@ -271,6 +270,12 @@ it might return an error.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 A person can have any number of tags (including 0)
+</div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Information**
+
+**null** means empty!
 </div>
 
 For example:
@@ -331,6 +336,7 @@ having the whole SoC staff faculty in your contact book is necessary!
 <div markdown="span" class="alert alert-danger">
 :exclamation: **Warning:** <br>
 
+
 The `prof -a` command takes a bit of time to load all the data, as we are adding over 300+ contacts into Dook. 
 We recommend that upon running this command, you as a user should **wait a few seconds** and not force close the application or run other commands
 as it could lead to unexpected behaviors. Our team is aware of this and is looking into a more efficient solution to add all professors!
@@ -367,13 +373,12 @@ edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is **not** cumulative.
 
 | Param            | Remarks                                                                                                        |
 |------------------|----------------------------------------------------------------------------------------------------------------|
 | **INDEX**        | Must be an integer in the range [1, number of contacts displayed]                                              |
 | **NAME**         | Optional                                                                                                       |
-| **PHONE_NUMBER** | Optional, only numbers and minimum 3 digits                                                                    |
+| **PHONE_NUMBER** | Optional, only numbers and no minimum number of digits                                                         |
 | **EMAIL**        | Optional, follow standard email formats (i.e xxx@xxx)                                                          |
 | **ADDRESS**      | Optional                                                                                                       |
 | **TAG**          | Optional, each tag should start with -t (i.e. for two tags `friend`, `groupmate` use `-t friend -t groupmate`) |
@@ -507,7 +512,7 @@ Say you booked a consultation in the next week, and you would like to keep track
 book -n DESCRIPTION -s START_TIME -e END_TIME -note NOTE
 ```
 * Duplicate bookings are not allowed! This means that across two bookings, you cannot have all four params to be the exact same.
-* For now: start and end time formats must be in `yyyy-mm-d hh:mm` (we are working to expand this!)
+* For now: start and end time formats must be in `yyyy-mm-dd hh:mm` (we are working to expand this!)
 
 | Param           | Remarks                                  |
 |-----------------|------------------------------------------|
@@ -568,6 +573,13 @@ Below shows the success message upon executing the command.
 
 ![Update Command Success Message](images/UpdateCommandSuccessMessage.png)
 
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Caution** <br>
+
+The date must exist on the calendar, so **31st Feb** or **31st Apr** would not be allowed!
+
+</div>
+
 #### Cancelling a booking : `cancel`
 
 **Situation:** You realised that you are not available on the current booking date, and you have apologised to the Professor to cancel the booking altogether.
@@ -601,7 +613,7 @@ Below shows the success message upon executing the command.
 <div markdown="block" class="alert alert-success">
 :bulb: **Tips**
 
-You might want to use [search](###-searching-for-a-booking) to display the booking in the GUI first to easily find its INDEX.
+You might want to use [search](#searching-for-a-booking--search) to display the booking in the GUI first to easily find its INDEX.
 </div>
 
 #### Clearing all bookings entries : `cancel -a`
@@ -657,7 +669,7 @@ it couldn't find any such bookings in the [JSON](#glossary) file.
 <div markdown="block" class="alert alert-success">
 :bulb: **Tips**
 
-Want to see all your bookings again? Try the [view command](###-searching-for-a-booking) .
+Want to see all your bookings again? Try the [view command](#viewing-all-bookings--view) .
 </div>
 
 #### Viewing all bookings : `view`
@@ -733,6 +745,13 @@ Isn't that cool?
 
 Try adding some more aliases and see how Dook responds efficiently! Remember to 
 replace the whole command such as `theme -bg light` otherwise it won't work as expected.
+</div>
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Caution** <br>
+
+`alias` can overwrite any commands and will take precedence, and cannot be deleted for now. Use with caution!
+
 </div>
 
 <div markdown="block" class="alert alert-danger">
@@ -837,22 +856,23 @@ The list of valid commands accept **only lowercase letters**. For example, `Book
 
 ## Glossary
 
-| Term                                                                                                                                                                           | Meaning                                                                                                                                                                                                                                                                                      |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Address Book (for Dook)](https://en.wikipedia.org/wiki/Command-line_interface)**                                                                                            | A json file that saves all the data regarding contacts and consultations.                                                                                                                                                                                                                    |
-| **[CLI (Command Line Interface)](https://en.wikipedia.org/wiki/Command-line_interface)**                                                                                       | A text-based interface where users type in commands instead of interacting with the application's graphics.                                                                                                                                                                                  |
-| **[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)**                                                                                                                | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                                                                              |
-| **[Command](https://en.wikipedia.org/wiki/Command_(computing))**                                                                                                               | A line of instructions that you input into the command box. Also see: Command Box                                                                                                                                                                                                            |
-| **[Command Box](https://www.codecademy.com/articles/command-line-commands)** <a name="command-box"></a>                                                                        | A box for you to input commands.                                                                                                                                                                                                                                                             |
-| **[Command Output Box](https://stackoverflow.com/questions/3038392/do-you-know-any-command-line-http-fetching-utility-like-wget)** <a name="command-output-box"></a>           | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture.                                                             |
-| **[Contact List](https://support.microsoft.com/en-us/office/create-and-share-contact-groups-in-outlook-com-34a9c07e-9a4c-4ec4-a272-bc35a9c8c253)** <a name="contact-list"></a> | The Contact list is the list of contacts on the left side of the application.                                                                                                                                                                                                                |
-| **[Booking List](https://www.smartsheet.com/free-excel-booking-templates)** <a name="booking-list"></a>                                                                        | The Booking list is the list of bookings on the right side of the application.                                                                                                                                                                                                               |
-| **[GUI (Graphic User Interface)](https://en.wikipedia.org/wiki/Graphical_user_interface)**                                                                                     | A graphical based interface where users interact with the application's graphics like buttons or scroll panes. Also see: CLI                                                                                                                                                                 |
-| **[JSON](https://www.json.org/json-en.html)**                                                                                                                                  | A JSON (JavaScript Object Notation) file is a lightweight data interchange format that's easy for humans to read and write and easy for machines to parse and generate. JSON files typically use the `.json` extension and consist of key/value pairs similar to JavaScript object literals. |
-| **[Prefix](https://techterms.com/definition/prefix)**                                                                                                                          | A letter or phrase before an input.                                                                                                                                                                                                                                                          |
-| **[Tag](https://en.wikipedia.org/wiki/Tag_(metadata))**                                                                                                                        | A text phrase used to categorize employees by. A tag must be either a Student, Professor, or Teaching Assistant (TA)                                                                                                                                                                         |
-| **[Index](https://en.wikipedia.org/wiki/Index_(computer_science))**                                                                                                            | The number labeling each employee in the employee list.                                                                                                                                                                                                                                      |
-| **[Web browser](https://www.mozilla.org/en-US/firefox/new/)**                                                                                                                  | An application to serve the web like Internet Explorer, Google Chrome, or Firefox. In fact, you are probably using one to access this guide right now!                                                                                                                                       |
+| Term                                                                                                                                                                 | Meaning                                                                                                                                                                                                                                                                                      |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Address Book (for Dook)](https://en.wikipedia.org/wiki/Command-line_interface)**                                                                                  | A json file that saves all the data regarding contacts and consultations.                                                                                                                                                                                                                    |
+| **[CLI (Command Line Interface)](https://en.wikipedia.org/wiki/Command-line_interface)**                                                                             | A text-based interface where users type in commands instead of interacting with the application's graphics.                                                                                                                                                                                  |
+| **[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)**                                                                                                      | A text file format that uses commas to separate values. It is supported by a wide range of software, including Microsoft Excel.                                                                                                                                                              |
+| **[Command](https://en.wikipedia.org/wiki/Command_(computing))**                                                                                                     | A line of instructions that you input into the command box. Also see: Command Box                                                                                                                                                                                                            |
+| **[Command Box](https://www.codecademy.com/articles/command-line-commands)** <a name="command-box"></a>                                                              | A box for you to input commands.                                                                                                                                                                                                                                                             |
+| **[Command Output Box](https://stackoverflow.com/questions/3038392/do-you-know-any-command-line-http-fetching-utility-like-wget)** <a name="command-output-box"></a> | A box that displays the results of the command you keyed in. It will tell you whether the command you entered has successfully run, or if there is an error in your command that needs to be fixed. Refer to []() for a picture.                                                             |
+| **Contact List** <a name="contact-list"></a>                                                                                                                         | The Contact list is the list of contacts on the left side of the application.                                                                                                                                                                                                                |
+| **Booking List** <a name="booking-list"></a>                                                                                                                         | The Booking list is the list of bookings on the right side of the application.                                                                                                                                                                                                               |
+| **[GUI (Graphic User Interface)](https://en.wikipedia.org/wiki/Graphical_user_interface)**                                                                           | A graphical based interface where users interact with the application's graphics like buttons or scroll panes. Also see: CLI                                                                                                                                                                 |
+| **[JSON](https://www.json.org/json-en.html)**                                                                                                                        | A JSON (JavaScript Object Notation) file is a lightweight data interchange format that's easy for humans to read and write and easy for machines to parse and generate. JSON files typically use the `.json` extension and consist of key/value pairs similar to JavaScript object literals. |
+| **[Prefix](https://techterms.com/definition/prefix)**                                                                                                                | A letter or phrase before an input.                                                                                                                                                                                                                                                          |
+| **[Tag](https://en.wikipedia.org/wiki/Tag_(metadata))**                                                                                                              | A text phrase used to categorize employees by. A tag must be either a Student, Professor, or Teaching Assistant (TA)                                                                                                                                                                         |
+| **[Index](https://en.wikipedia.org/wiki/Index_(computer_science))**                                                                                                  | The number labeling each employee in the employee list.                                                                                                                                                                                                                                      |
+| **[Web browser](https://www.mozilla.org/en-US/firefox/new/)**                                                                                                        | An application to serve the web like Internet Explorer, Google Chrome, or Firefox. In fact, you are probably using one to access this guide right now!                                                                                                                                       |
+
 
 
 [Back To Top](#table-of-contents)
