@@ -55,9 +55,17 @@ public class CommandBox extends UiPart<Region> {
             }
         });
 
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            KeyCodeCombination pasteCombination = new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_ANY);
+            KeyCodeCombination pasteCombinationMac = new KeyCodeCombination(KeyCode.V, KeyCombination.META_ANY);
+            if (pasteCombination.match(event) || pasteCombinationMac.match(event)) {
+                pasteTextFromClipboard();
+                event.consume();
+            }
+        });
+
         commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                // Move the caret to the beginning of the text
                 commandTextField.positionCaret(2);
                 event.consume();
             }
@@ -154,32 +162,31 @@ public class CommandBox extends UiPart<Region> {
             double effectiveDelta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
 
             int caretPosition = commandTextField.getCaretPosition();
-
             if (effectiveDelta < 0) { // Scroll left or down
-                if (caretPosition < commandTextField.getText().length()) {
-                    commandTextField.positionCaret(caretPosition + 1);
+                // Ensures that scrolling does not move the caret before the prompt
+                if (caretPosition < commandTextField.getText().length() && caretPosition > 2) {
+                    commandTextField.positionCaret(Math.max(caretPosition + 1, 2));
                 }
             } else if (effectiveDelta > 0) { // Scroll right or up
-                if (caretPosition > 0) {
-                    commandTextField.positionCaret(caretPosition - 1);
+                // Prevents scrolling from moving the caret into the prompt
+                if (caretPosition > 2) {
+                    commandTextField.positionCaret(Math.max(caretPosition - 1, 2));
                 }
             }
             event.consume();
         });
     }
 
+
     /**
      * Copies the selected text from the command text field to the system clipboard,
-     * excluding the prompt ("> "). If the selection start index is less than 2, which
-     * indicates that the prompt is part of the selection, it adjusts the start index
-     * to exclude the prompt from the copied text.
+     * excluding the prompt ("> ")
      */
     private void copyTextWithoutPrompt() {
         String selectedText = commandTextField.getSelectedText();
         int selectionStart = commandTextField.getSelection().getStart();
         int selectionEnd = commandTextField.getSelection().getEnd();
 
-        // Exclude the prompt from the selected text if it's included
         if (selectionStart < 2) {
             selectedText = commandTextField.getText().substring(2, selectionEnd);
         }
@@ -189,6 +196,23 @@ public class CommandBox extends UiPart<Region> {
         Clipboard.getSystemClipboard().setContent(content);
     }
 
+    /**
+     * Pastes the selected text from the command text field to the system clipboard,
+     * excluding the prompt ("> ")
+     */
+    private void pasteTextFromClipboard() {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        if (clipboard.hasString()) {
+            String clipboardText = clipboard.getString();
+
+            int caretPosition = commandTextField.getCaretPosition();
+            if (caretPosition <= 2) {
+                commandTextField.positionCaret(commandTextField.getText().length()); // Move the caret to the end
+            }
+
+            commandTextField.replaceSelection(clipboardText);
+        }
+    }
 
     /**
      * Represents a function that can execute commands.
