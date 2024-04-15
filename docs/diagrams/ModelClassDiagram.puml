@@ -38,6 +38,7 @@ Class Booking
 Class Description
 Class StartTime
 Class EndTime
+Class Notes
 
 }
 
@@ -76,5 +77,6 @@ Email -[hidden]right-> Tag
 Booking *-->"1" Description
 Booking *--> "1" StartTime
 Booking *--> "1" EndTime
+Booking *--> "1" Notes
 
 @enduml
