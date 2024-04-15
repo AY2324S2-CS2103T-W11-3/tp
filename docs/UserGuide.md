@@ -241,6 +241,7 @@ It will open a window similar to this:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 ### Contact Management
 
 #### Adding a contact: `add`
@@ -490,7 +491,7 @@ Below is the expected contact list after running `delete 3`, we observe `Sarah J
 `find John` followed by `delete 1` deletes the 1st person with the name `John`.
 
 </div>
-
+<br>
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Be careful!**<br>
@@ -501,6 +502,7 @@ This command is **irreversible**, the deleted contact information will be lost!
 
 [Back To Top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 ### Booking Management
 
 #### Adding a booking : `book`
